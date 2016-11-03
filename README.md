@@ -16,6 +16,10 @@ To run this application, execute the following commands:
     ```
     $ gulp dev
     ```
+    
+    Open a browser to:
+    * http://localhost:9000/webpack-dev-server/
+    * http://localhost:9000/
 
   3. Create the app distribution to be used by the back-end server
 
