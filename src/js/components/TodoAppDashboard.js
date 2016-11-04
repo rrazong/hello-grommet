@@ -72,8 +72,7 @@ export default class TodoAppDashboard extends Component {
           <Box direction="row">
             <Status value={task.status} size='small' />
             <span>{task.label}</span>
-            <Button icon={<CloseIcon size="small" key={`task_${index}`} />} onClick={this._onDeleteTask.bind(this, index)}>
-            </Button>
+            <Button icon={<CloseIcon size="small" a11yTitle={`Delete task ${task.label}`} a11yTitleId={`delete-icon-${index}`}/>} onClick={this._onDeleteTask.bind(this, index)} />
           </Box>
         </ListItem>
       );
@@ -121,7 +120,7 @@ export default class TodoAppDashboard extends Component {
             <Footer>
               <Button primary={true}
                       label="Add Task"
-                      onClick={this._onRequestForAddTask}></Button>
+                      onClick={this._onRequestForAddTask} />
             </Footer>
           </Box>
         </Box>

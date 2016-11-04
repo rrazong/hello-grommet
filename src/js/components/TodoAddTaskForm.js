@@ -15,7 +15,7 @@ export default class TodoAddTaskForm extends React.Component {
     this.state = {
       label: undefined,
       status: undefined
-    }
+    };
   }
 
   _onSubmit = (e) => {
@@ -27,21 +27,19 @@ export default class TodoAddTaskForm extends React.Component {
       onSubmit({
         label,
         status : status || 'ok'
-      })
+      });
     }
 
     onClose();
   }
 
   _onLabelChange = (e) => {
-    console.log(`label chosen to be ${e.target.value}`)
     this.setState({
       label: e.target.value
     });
   }
 
   _onStatusChange = (e) => {
-    console.log(`status chosen to be ${e.target.value}`)
     this.setState({
       status: e.target.value
     });
