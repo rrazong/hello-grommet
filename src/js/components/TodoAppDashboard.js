@@ -10,6 +10,7 @@ import Status from 'grommet/components/icons/Status';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
 import TodoAddTaskForm from './TodoAddTaskForm';
+import CloseIcon from 'grommet/components/icons/base/Close';
 
 function getLabel(label, count, colorIndex) {
   return {
@@ -37,6 +38,18 @@ export default class TodoAppDashboard extends Component {
     this.setState( { addTask: false });
   }
 
+  _onTaskConfirm = (task) => {
+    let { tasks } = this.state;
+    tasks.push(task);
+    this.setState({ tasks });
+  }
+
+  _onDeleteTask = (taskIndex) => {
+    let { tasks } = this.state;
+    tasks.splice(taskIndex, 1);
+    this.setState({ tasks });
+  }
+
   render () {
 
     let tasksMap = {
@@ -56,9 +69,11 @@ export default class TodoAppDashboard extends Component {
       return (
         <ListItem key={`task_${index}`} separator={separator}
           responsive={false}>
-          <Box>
+          <Box direction="row">
             <Status value={task.status} size='small' />
-            <span>{task.item}</span>
+            <span>{task.label}</span>
+            <Button icon={<CloseIcon size="small" key={`task_${index}`} />} onClick={this._onDeleteTask.bind(this, index)}>
+            </Button>
           </Box>
         </ListItem>
       );
@@ -67,7 +82,8 @@ export default class TodoAppDashboard extends Component {
     let addTaskLayer;
     if (this.state.addTask) {
       addTaskLayer = (
-        <TodoAddTaskForm onClose={this._onCloseTask} />
+        <TodoAddTaskForm onClose={this._onCloseTask}
+                         onSubmit={this._onTaskConfirm}/>
       );
     }
     const series = [
@@ -82,7 +98,7 @@ export default class TodoAppDashboard extends Component {
       label = series[this.state.index].label;
     } else {
       value = 0;
-      series.forEach(serie => value += serie.value);
+      series.forEach(series => value += series.value);
       label = 'Total';
     }
 
