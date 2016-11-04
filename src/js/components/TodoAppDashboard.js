@@ -9,6 +9,7 @@ import Value from 'grommet/components/Value';
 import Status from 'grommet/components/icons/Status';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
+import Layer from 'grommet/components/Layer';
 
 function getLabel(label, count, colorIndex) {
   return {
@@ -30,6 +31,10 @@ export default class TodoAppDashboard extends Component {
 
   _onRequestForAddTask = () => {
     this.setState( { addTask: true });
+  }
+
+  _onCloseTask = () => {
+    this.setState( { addTask: false });
   }
 
   render () {
@@ -59,8 +64,13 @@ export default class TodoAppDashboard extends Component {
       );
     }, this);
 
+    let addTaskLayer;
     if (this.state.addTask) {
-      alert('addTask is true');
+      addTaskLayer = (
+        <Layer align="right"
+               closer={true}
+               onClose={this._onCloseTask}>Hello Again</Layer>
+      );
     }
     const series = [
       getLabel('Past Due', tasksMap.critical, 'critical'),
@@ -95,10 +105,13 @@ export default class TodoAppDashboard extends Component {
               {tasks}
             </List>
             <Footer>
-              <Button label="Add Task" onClick={this._onRequestForAddTask}></Button>
+              <Button primary={true}
+                      label="Add Task"
+                      onClick={this._onRequestForAddTask}></Button>
             </Footer>
           </Box>
         </Box>
+        { addTaskLayer }
       </Section>
     );
   }
