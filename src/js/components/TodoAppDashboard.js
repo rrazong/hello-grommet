@@ -9,7 +9,7 @@ import Value from 'grommet/components/Value';
 import Status from 'grommet/components/icons/Status';
 import Button from 'grommet/components/Button';
 import Footer from 'grommet/components/Footer';
-import Layer from 'grommet/components/Layer';
+import TodoAddTaskForm from './TodoAddTaskForm';
 
 function getLabel(label, count, colorIndex) {
   return {
@@ -67,9 +67,7 @@ export default class TodoAppDashboard extends Component {
     let addTaskLayer;
     if (this.state.addTask) {
       addTaskLayer = (
-        <Layer align="right"
-               closer={true}
-               onClose={this._onCloseTask}>Hello Again</Layer>
+        <TodoAddTaskForm onClose={this._onCloseTask} />
       );
     }
     const series = [
